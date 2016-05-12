@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thinkland.sdk.android.JuheSDKInitializer;
 import com.zc741.mineexpress.Utils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        //聚合数据初始化
+        JuheSDKInitializer.initialize(getApplicationContext());
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("选择快递");
         toolbar.setTitleTextColor(Color.WHITE);
@@ -33,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         //显示布局
         initView();
     }
+
+
 
     private void initView() {
         final int expressImages[] = new int[]{

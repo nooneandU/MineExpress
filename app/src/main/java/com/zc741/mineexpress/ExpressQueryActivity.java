@@ -88,11 +88,11 @@ public class ExpressQueryActivity extends BaseActivity {
             }
         });
 
+        //进入查询页面时EditText已经获得焦点 强制弹出键盘
         showKeyboard();
 
         //ExitText显示上一次查询的记录
         showHistorySPF();
-
     }
 
     private void showHistorySPF() {
@@ -264,7 +264,7 @@ public class ExpressQueryActivity extends BaseActivity {
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                     String content = mExpress_number.getText().toString();
                     if (content.isEmpty()) {
-                        ToastUtils.toast(getApplicationContext(), "订单号为空，请重新输入", Toast.LENGTH_SHORT);
+                        ToastUtils.toast(getApplicationContext(), "订单号为空，请输入订单号", Toast.LENGTH_SHORT);
                     } else {
                         getInfos();
                     }
