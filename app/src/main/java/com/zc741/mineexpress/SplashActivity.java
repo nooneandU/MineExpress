@@ -5,9 +5,9 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,28 +21,21 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         //申请权限
-        addReadPhoneState();
+        if (Build.VERSION.SDK_INT >= 23) {
+            addReadPhoneState();
+        } else {
+            delayShow();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     private void addReadPhoneState() {
-
         int requestPhoneState = checkSelfPermission(Manifest.permission.READ_PHONE_STATE);
         if (requestPhoneState != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE}, READ_PHONE_STATE_CODE);
             return;
-        }else {
-            TimerTask timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_to_left);
-                    finish();
-                }
-            };
-            Timer timer = new Timer();
-            timer.schedule(timerTask, 4000);
-
+        } else {
+            delayShow();
         }
     }
 
@@ -52,24 +45,25 @@ public class SplashActivity extends AppCompatActivity {
         if (requestCode == READ_PHONE_STATE_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission Granted
-                System.out.println("权限申请了");
-
-                TimerTask timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_to_left);
-                        finish();
-                    }
-                };
-                Timer timer = new Timer();
-                timer.schedule(timerTask, 4000);
-
+                delayShow();
             } else {
                 // Permission Denied
-                System.out.println("权限被拒绝了");
                 finish();
             }
         }
+    }
+
+    //延迟显示
+    private void delayShow() {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_to_left);
+                finish();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 4000);
     }
 }
