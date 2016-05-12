@@ -2,11 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="5dp"
-              android:padding="7dp"
+              android:layout_margin="3dp"
+              android:padding="3dp"
               android:orientation="vertical">
 
     <LinearLayout
+        android:elevation="3dp"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/items_bg"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

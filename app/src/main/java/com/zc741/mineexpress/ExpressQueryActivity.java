@@ -90,29 +90,75 @@ public class ExpressQueryActivity extends BaseActivity {
 
         showKeyboard();
 
-        //1.先显示之前查询过的运单号码 会取同一个码
-        /*if (mExpressNumber == null) {
-            //读取单号
-            SharedPreferences read = getSharedPreferences("expressNumber", MODE_PRIVATE);
-            String number = read.getString("expressNumber", mExpressNumber);
-            System.out.println("number =" + number);
-            EditText editText = (EditText) findViewById(R.id.express_number);
-            editText.setText(number);
+        //ExitText显示上一次查询的记录
+        showHistorySPF();
 
-        }*/
+    }
+
+    private void showHistorySPF() {
+        if (mExpressNumber == null) {
+            //读取单号
+            if (mExpressName.equals("顺丰快递")) {
+                getExpressNumberSharePreferences();
+            } else if (mExpressName.equals("申通快递")) {
+                getExpressNumberSharePreferences();
+            } else if (mExpressName.equals("圆通快递")) {
+                getExpressNumberSharePreferences();
+            } else if (mExpressName.equals("韵达快递")) {
+                getExpressNumberSharePreferences();
+            } else if (mExpressName.equals("天天快递")) {
+                getExpressNumberSharePreferences();
+            } else if (mExpressName.equals("EMS")) {
+                getExpressNumberSharePreferences();
+            } else if (mExpressName.equals("中通快递")) {
+                getExpressNumberSharePreferences();
+            } else if (mExpressName.equals("百世汇通")) {
+                getExpressNumberSharePreferences();
+            }
+        }
+    }
+
+    private void getExpressNumberSharePreferences() {
+        SharedPreferences read = getSharedPreferences("ExpressNumber" + mExpressName, MODE_PRIVATE);
+        String number = read.getString("ExpressNumber" + mExpressName, mExpressNumber);
+        System.out.println(mExpressName+"number =" + number);
+        EditText editText = (EditText) findViewById(R.id.express_number);
+        editText.setText(number);
     }
 
     //拿用户填写的信息
     private void getInfos() {
+        //1.根据快递公司（intent传的值进行分类存储）
+        if (mExpressName.equals("顺丰快递")) {
+            saveSharePreferences();
+        } else if (mExpressName.equals("申通快递")) {
+            saveSharePreferences();
+        } else if (mExpressName.equals("圆通快递")) {
+            saveSharePreferences();
+        } else if (mExpressName.equals("韵达快递")) {
+            saveSharePreferences();
+        } else if (mExpressName.equals("天天快递")) {
+            saveSharePreferences();
+        } else if (mExpressName.equals("EMS")) {
+            saveSharePreferences();
+        } else if (mExpressName.equals("中通快递")) {
+            saveSharePreferences();
+        } else if (mExpressName.equals("百世汇通")) {
+            saveSharePreferences();
+        }
+
+        //请求网络数据
+        getDataFromServer();
+    }
+
+    private void saveSharePreferences() {
         //点击搜索时获取快递单号
         mExpressNumber = mExpress_number.getText().toString();
         //保存单号
-        SharedPreferences sharedPreferences = getSharedPreferences("expressNumber", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("ExpressNumber" + mExpressName, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("expressNumber", mExpressNumber);
-        editor.commit();
-        //请求网络数据
-        getDataFromServer();
+        editor.putString("ExpressNumber" + mExpressName, mExpressNumber);
+        editor.apply();
     }
 
     //请求网络数据
@@ -133,7 +179,6 @@ public class ExpressQueryActivity extends BaseActivity {
                 finish();
             }
         });
-
     }
 
     //解析json数据
@@ -150,8 +195,6 @@ public class ExpressQueryActivity extends BaseActivity {
         } else {
             mLength = mExpressInfo.getResult().getList().size();//list的数据大小
         }
-
-
         //循环取出数据显示在listview上
         initData();
     }

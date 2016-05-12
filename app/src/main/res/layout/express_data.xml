@@ -2,39 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_margin="5dp"
-              android:background="@drawable/items_bg"
-              android:elevation="8dp"
-              android:orientation="vertical"
-              android:padding="5dp">
+              android:background="#FFF"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:background="@drawable/items_bg"
+        android:elevation="5dp"
+        android:orientation="vertical"
         android:padding="5dp">
 
-        <TextView
-            android:id="@+id/datetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="datetime"
-            android:textColor="#999"/>
 
-        <TextView
-            android:id="@+id/zone"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="zone"
-            android:textColor="#999"/>
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="datetime"
+                android:textColor="#999"/>
+
+            <TextView
+                android:id="@+id/zone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="zone"
+                android:textColor="#999"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="remark"
+            android:textColor="#727272"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/remark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="remark"
-        android:textColor="#999"/>
 </LinearLayout>

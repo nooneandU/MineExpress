@@ -36,7 +36,7 @@
    <ListView
        android:layout_below="@id/textInputLayout1"
        android:id="@+id/listview_express"
-       android:layout_width="match_parent"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content">
    </ListView>
 
